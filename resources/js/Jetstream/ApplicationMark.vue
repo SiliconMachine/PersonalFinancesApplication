@@ -1,3 +1,3 @@
 <template>
-    <img src="/img/logo_transparent_icon.svg"/>
+  <h2 class="font-bold">PF</h2>
 </template>
