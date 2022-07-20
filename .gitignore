@@ -1,0 +1,21 @@
+/node_modules
+/public/hot
+/public/storage
+/public/css/app.css
+/public/js/app.js
+/public/js/bug-snatch.js
+/public/js/bug-snatch.js.map
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+.nova
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Ignore the _volumes folder, except certain Traefik configs
+/_volumes/*
+!/_volumes/traefik

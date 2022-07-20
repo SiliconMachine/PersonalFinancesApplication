@@ -1,0 +1,105 @@
+version: "3.8"
+services:
+  #Application
+  money-app-application:
+    build:
+      context: .
+      dockerfile: ./docker/development/php/Dockerfile
+    container_name: money-app-application
+    image: application
+    restart: "no"
+    tty: true
+    working_dir: /var/www
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1 remote_port=9000 remote_enable=1
+    volumes:
+      - ./:/var/www
+      # - ./docker/development/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - money-app
+
+  #Webserver
+  money-app-webserver:
+    build:
+      context: .
+      dockerfile: "./docker/development/nginx/Dockerfile"
+    container_name: money-app-webserver
+    restart: "no"
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/development/nginx/default.conf/:/etc/nginx/conf.d/default.conf
+    networks:
+      - money-app
+
+  #MySQL
+  money-app-database:
+    image: mysql:5.7.22
+    container_name: money-app-database
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: money-app
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    networks:
+      - money-app
+
+  #PHP My Admin
+  money-app-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "7000:80"
+    links:
+      - money-app-database:db
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - money-app
+
+  money-app-mailhog:
+    image: mailhog/mailhog
+    container_name: "money-app-mailhog"
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - money-app
+
+  money-app-cache:
+    build:
+      context: .
+      dockerfile: docker/development/redis.docker
+    container_name: "money-app-cache"
+    expose:
+      - "6379"
+    mem_limit: "${DOCKER_CACHE_MEM_LIMIT}"
+    mem_reservation: "${DOCKER_CACHE_MEM_RESERVATION}"
+    cpus: "${DOCKER_CACHE_CPUS}"
+    networks:
+      - money-app
+
+  money-app-meilisearch:
+    image: getmeili/meilisearch:v0.25.2
+    depends_on:
+      - "money-app-cache"
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+
+#Networks
+networks:
+  money-app:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
