@@ -55,6 +55,7 @@ services:
   #PHP My Admin
   money-app-phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: "money-app-phpmyadmin"
     ports:
       - "7000:80"
     links:
@@ -90,11 +91,15 @@ services:
 
   money-app-meilisearch:
     image: getmeili/meilisearch:v0.25.2
+    container_name: "money-app-meilisearch"
+    expose:
+      - "7700"
     depends_on:
       - "money-app-cache"
     environment:
       MEILI_NO_ANALYTICS: "true"
-
+    networks:
+      - money-app
 #Networks
 networks:
   money-app:
