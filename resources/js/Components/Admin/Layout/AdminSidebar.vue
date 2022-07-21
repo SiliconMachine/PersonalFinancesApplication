@@ -43,13 +43,13 @@ export default {
           icon: "/img/icons/cash.svg",
           description: "Settings for how to organize and manage transactions",
         },
-        // {
-        //     name: 'Institutions',
-        //     href: '/admin/institutions',
-        //     current: window.location.href.includes('/admin/institutions'),
-        //     icon: '/img/icons/institution.svg',
-        //     description: 'Manage financial institution settings'
-        // }
+        {
+          name: "Institutions",
+          href: "/admin/institutions",
+          current: window.location.href.includes("/admin/institutions"),
+          icon: "/img/icons/institution.svg",
+          description: "Manage financial institution settings",
+        },
       ],
     };
   },
