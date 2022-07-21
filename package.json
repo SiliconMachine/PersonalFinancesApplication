@@ -32,6 +32,7 @@
         "@heroicons/vue": "^1.0.6",
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue3": "^0.5.2",
+        "@vuepic/vue-datepicker": "^3.3.1",
         "dayjs": "^1.10.6",
         "mitt": "^3.0.0",
         "vue": "^3.2.18",

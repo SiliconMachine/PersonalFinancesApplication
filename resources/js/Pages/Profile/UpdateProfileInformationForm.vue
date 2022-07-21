@@ -12,7 +12,7 @@
       <!-- Profile Photo -->
       <div
         class="col-span-6 sm:col-span-4"
-        v-if="$page.jetstream.managesProfilePhotos"
+        v-if="$page.props.jetstream.managesProfilePhotos"
       >
         <!-- Profile Photo File Input -->
         <input
@@ -33,7 +33,7 @@
           v-show="! photoPreview"
         >
           <img
-            :src="$page.user.profile_photo_url"
+            :src="$page.props.user.profile_photo_url"
             alt="Current Profile Photo"
             class="object-cover w-20 h-20 rounded-full"
           >
@@ -51,7 +51,7 @@
           </span>
         </div>
 
-        <jet-secondary-button
+        <!-- <jet-secondary-button
           class="mt-2 mr-2"
           type="button"
           @click.native.prevent="selectNewPhoto"
@@ -63,10 +63,10 @@
           type="button"
           class="mt-2"
           @click.native.prevent="deletePhoto"
-          v-if="$page.user.profile_photo_path"
+          v-if="$page.props.user.profile_photo_path"
         >
           Remove Photo
-        </jet-secondary-button>
+        </jet-secondary-button> -->
 
         <jet-input-error
           :message="form.error('photo')"

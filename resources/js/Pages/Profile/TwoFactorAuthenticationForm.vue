@@ -52,7 +52,7 @@
           </div>
 
           <div class="grid max-w-xl gap-1 px-4 py-4 mt-4 font-mono text-sm bg-gray-100 rounded-lg">
-            <div v-for="code in recoveryCodes">
+            <div v-for="code, index in recoveryCodes" :key="index">
               {{ code }}
             </div>
           </div>
@@ -184,7 +184,7 @@ export default {
 
   computed: {
     twoFactorEnabled() {
-      return !this.enabling && this.$page.user.two_factor_enabled;
+      return !this.enabling && this.$page.props.user.two_factor_enabled;
     },
   },
 };

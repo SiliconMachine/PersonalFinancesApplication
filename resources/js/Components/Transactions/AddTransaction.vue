@@ -84,7 +84,7 @@
               for="date"
               class="block text-sm font-medium leading-5 text-gray-700"
             >Date</label>
-            <div class="flex mt-1 rounded-md shadow-sm">
+            <div class="flex mt-1 rounded-md shadow-sm" id="dp3-wrapper">
               <span class="inline-flex items-center px-3 text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 sm:text-sm">
                 <svg
                   class="w-4 h-4"
@@ -101,16 +101,19 @@
                   ></path>
                 </svg>
               </span>
-              <input
+              
+              <!-- <input
                 type="text"
                 name="date"
                 id="date"
                 v-model="form.date"
                 class="flex-1 block w-full min-w-0 px-3 py-2 border-gray-300 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
+              /> -->
+              <Datepicker v-model="form.date" :format="'yyyy-mm-dd'" :enableTimePicker="false" hideInputIcon  inputClassName="!flex-1 !block !w-full !min-w-0 !px-3 !py-2 !border-gray-300 !rounded-none !rounded-r-md focus:!ring-blue-500 focus:!border-blue-500 sm:!text-sm" teleport="#dp3-wrapper" />
             </div>
           </div>
         </div>
+        
         <div class="sm:col-span-6">
           <label
             for="name"
@@ -203,12 +206,15 @@ import AccountsAPI from "@/api/accounts.js";
 import AccountSelect from "@/Components/Global/AccountSelect.vue";
 import TransactionsAPI from "@/api/transactions.js";
 import CategorySelect from "@/Components/Categories/CategorySelect.vue";
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   components: {
     AppModal,
     AccountSelect,
     CategorySelect,
+    Datepicker
   },
 
   data() {
@@ -218,7 +224,7 @@ export default {
 
       form: {
         account: {},
-        date: "",
+        date: new Date(),
         amount: 0.0,
         direction: "outflow",
         name: "",
@@ -312,3 +318,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.dp__main {
+  width: 100%;
+}
+</style>

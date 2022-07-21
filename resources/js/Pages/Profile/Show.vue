@@ -2,22 +2,22 @@
   <app-layout>
     <template #header>
       <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        Profile
+        Profile 
       </h2>
     </template>
 
     <div>
       <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <update-profile-information-form
-          :name="$page.user.name"
-          :email="$page.user.email"
-        />
+        <!-- <update-profile-information-form
+          :name="$page.props.user.name"
+          :email="$page.props.user.email"
+        /> -->
 
         <jet-section-border />
 
-        <update-password-form class="mt-10 sm:mt-0" />
+        <!-- <update-password-form class="mt-10 sm:mt-0" /> -->
 
-        <div v-if="$page.jetstream.canManageTwoFactorAuthentication">
+        <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
           <jet-section-border />
 
           <two-factor-authentication-form class="mt-10 sm:mt-0" />

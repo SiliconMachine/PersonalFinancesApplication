@@ -79,7 +79,7 @@
                 Dashboard
               </jet-responsive-nav-link>
 
-              <jet-responsive-nav-link href="/budget">
+              <jet-responsive-nav-link href="/budgets">
                 <svg
                   class="w-6 h-6 mr-4 transition duration-150 ease-in-out text-astronaut-400 group-hover:text-astronaut-500 group-focus:text-astronaut-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -228,8 +228,8 @@
               </jet-nav-link>
 
               <jet-nav-link
-                href="/budget"
-                :active="$page.currentRouteName == 'budget'"
+                href="/budgets"
+                :active="$page.currentRouteName == 'budgets'"
               >
                 <!-- Heroicon name: users -->
                 <svg
